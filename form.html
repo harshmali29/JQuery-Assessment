@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="icon" type="image/png" href="favicon.png"> <!-- Replace with your favicon path -->
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- External CSS file for styling -->
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .inputField {
+        margin-bottom: 10px;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="inputField" required>
+        <span id="nameError" class="error"></span><br>
+
+        <label for="mobile">Mobile:</label>
+        <input type="tel" id="mobile" name="mobile" class="inputField" required>
+        <span id="mobileError" class="error"></span><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        // External JS file for validation
+
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var mobile = document.getElementById("mobile").value;
+
+            // Regular expressions for validation
+            var nameRegex = /^[a-zA-Z]{3,6}$/;
+            var mobileRegex = /^\d{10}$/;
+
+            // Reset error messages
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("mobileError").innerText = "";
+
+            // Validate name
+            if (!nameRegex.test(name)) {
+                document.getElementById("nameError").innerText = "Invalid name (3-6 alphabets only)";
+                document.getElementById("name").focus();
+                return false;
+            }
+
+            // Validate mobile
+            if (!mobileRegex.test(mobile)) {
+                document.getElementById("mobileError").innerText = "Invalid mobile number (10 digits only)";
+                document.getElementById("mobile").focus();
+                return false;
+            }
+
+            // Form is valid
+            alert("Registration successful!");
+            return true;
+        }
+
+    </script>
+
+    <script src="validation.js"></script> <!-- External JS file for validation -->
+</body>
+
+</html>
